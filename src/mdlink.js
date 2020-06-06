@@ -2,25 +2,25 @@ const path = require('path');
 const fs = require('fs');
 const marked = require('marked');
 
-const fileTrue = (file) => fs.existsSync(file);
+let fileTrue = (fileTrue) => fs.existsSync(fileTrue);
 
-const absolutePath = (file) => {
-  if (path.isAbsolute(file) === true) {
-    return file;
+const absolutePath = (fileTrue) => {
+  if (path.isAbsolute(fileTrue) === true) {
+    return fileTrue;
   } 
-  return (path.resolve(file));
+  return (path.resolve(fileTrue));
 };
 
-const isDirec = (file) => fs.lstatSync(file).isDirectory();
+const isDirec = (fileTrue) => fs.lstatSync(fileTrue).isDirectory();
 
-const walkDir = (file) => {
+const walkDir = (fileTrue) => {
   let arrayFile = [];
-  if (!isDirec(file)) {
-    arrayFile.push(file);
+  if (!isDirec(fileTrue)) {
+    arrayFile.push(fileTrue);
   } else {
-    const readDirectory = fs.readdirSync(file);
+    const readDirectory = fs.readdirSync(fileTrue);
     readDirectory.map((read) => {
-      const next = path.join(file, read);
+      const next = path.join(fileTrue, read);
       let result= (isDirec(next)) ? arrayFile = arrayFile.concat(walkDir(next)) : arrayFile.push(next);
       return result
     });
