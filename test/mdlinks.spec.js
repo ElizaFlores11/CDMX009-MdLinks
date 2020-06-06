@@ -1,59 +1,63 @@
 const {
-  absolutePath, getDirectory, getLinks,
+  absolutePath, walkDir, getLinks,
 } = require('../src/mdlink.js');
 
 describe('Funtion AbsolutePath', () => {
   it('is a function', () => {
     expect(typeof absolutePath).toBe('function');
   });
-  it('Deberia retornar un string con la ruta absoluta', () => {
+  it('Return absolute path', () => {
     const output = 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\src\\mdlink.js'; 
     expect(absolutePath('./src/mdlink.js')).toBe(output);
   });
-  it('Deberia retornar un string con la entrada actual', () => {
+  it('It should return a string with the current entry', () => {
     const output = 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\src\\mdlink.js';
     expect(absolutePath('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\src\\mdlink.js')).toBe(output);
   });
 });
 
-//Test prueba una funcion realizada con una lib para extraer rutas dentro de dir y subdir//
-
-describe('Asincrono - Promise(resolve, reject)', () => {
-  it('Promise(resolve, reject)', () => {
-    expect(typeof getDirectory).toEqual('function');
+// assets prueba una funcion usada para extraer rutas dentro de dir y subdir//
+describe('walkDir ', () => {
+  it('is a function', () => {
+    expect(typeof walkDir).toBe('function');
   });
-  it('Promise- .resolves', () => {
-    const positiveR = ['test/final.md', 'test/out.md', 'test/read.md', 'test/README.md'];
-    return expect(Promise.resolve(positiveR)).resolves.toEqual(positiveR);
-  });
-  it('Promise- .reject', () => {
-    const negativeR = ['Error'];
-    return expect(Promise.reject(negativeR)).rejects.toEqual(negativeR);
+  it('Should return an array of strings', () => {
+    const filesOutput = [
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\mdlinks.spec.js',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\out.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\read.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\assets-API\\other.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\assets-API\\out.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\assets-API\\prueba.js',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\assets-API\\assets.md'];
+    expect(walkDir('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets')).toEqual(filesOutput);
   });
 });
 
-// Test funcion extraer links //
+
+// assets funcion extraer links //
 
 describe('getLinks', () => {
   it('is a function', () => {
     expect(typeof getLinks).toBe('function');
   });
-  it('Deberia retornar un array de objetos, cada uno con 3 propiedades', () => {
+  it('It should return an array of objects, each with 3 propertie', () => {
     const linksOutput = [{
         href: 'https://docs.npmjs.com/getting-started/what-is-npm',
         text: 'NPM',
-        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md'
+        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md'
       },
       {
         href: 'https://docs.npmjs.com/getting-started/publishing-npm-packages',
         text: 'Publicar packpage',
-        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md'
+        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md'
       },
       {
         href: 'https://javascript.info/promise-basics',
         text: 'Promise',
-        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md'
+        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md'
       }]
-    expect(getLinks('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md')).toEqual(linksOutput);
+    expect(getLinks('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md')).toEqual(linksOutput);
   });
 });
