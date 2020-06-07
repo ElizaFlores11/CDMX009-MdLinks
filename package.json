@@ -1,15 +1,14 @@
 {
-  "name": "cdmx009-mdlinks",
+  "name": "mdlinks-elyfg",
   "version": "1.0.0",
   "description": "Library with node for read md files",
-  "main": "node index.js",
+  "main": "cli.js",
   "scripts": {
     "test": "jest --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ElizaFlores11/CDMX009-MdLinks.git"
-    
   },
   "author": "Elizabeth Flores",
   "license": "ISC",
@@ -18,7 +17,7 @@
   },
   "homepage": "https://github.com/ElizaFlores11/CDMX009-MdLinks#readme",
   "bin": {
-    "md-links": "./cli.js"
+    "mdlinks": "./cli.js"
   },
   "dependencies": {
     "chalk": "^4.0.0",
